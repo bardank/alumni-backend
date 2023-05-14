@@ -79,8 +79,8 @@ export class UsersService {
   async findOneByUsername(username: string): Promise<UserModel | undefined> {
     return this.userModel.findOne({ username: username }).exec();
   }
-  async findOneByEmail(phone: number): Promise<UserModel | undefined> {
-    return this.userModel.findOne({ phone }).exec();
+  async findOneByEmail(email: string): Promise<UserModel | undefined> {
+    return this.userModel.findOne({ email }).exec();
   }
   async findOneByPhoneWithPassword(
     phone: number,

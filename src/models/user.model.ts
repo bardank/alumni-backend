@@ -26,8 +26,8 @@ export class User {
   @Prop({ required: false, default: '' })
   username: string;
 
-  @Field(() => String, { description: 'Email is required', nullable: true })
-  @Prop({ required: false })
+  @Field(() => String, { description: 'Email is required', nullable: false, })
+  @Prop({ required: true })
   email: string;
 
   @Field(() => String, { description: 'Password is required', nullable: false })

@@ -11,10 +11,7 @@ import {
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './user/users.module';
 import { ProfileModule } from './profile/profile.module';
-import { ProductModule } from './product/product.module';
 import { UploadModule } from './upload/upload.module';
-import { ChatModule } from './chat/chat.module';
-import { SmsModule } from './sms/sms.module';
 
 // export interface GqlContext {
 //   req: Request;
@@ -92,10 +89,7 @@ import { SmsModule } from './sms/sms.module';
     UsersModule,
     AuthModule,
     ProfileModule,
-    ProductModule,
     UploadModule,
-    ChatModule,
-    SmsModule,
   ],
 })
 export class AppModule {}
