@@ -110,25 +110,7 @@ export class AuthService {
     return result;
   }
 
-  public async loginAdmin(
-    email: string,
-    password: string,
-  ): Promise<AuthResponse> {
-    const result = new AuthResponse();
-    const user = await this.validateUser(email, password);
 
-    if (user && user.role === AllowedRole.ad) {
-      user.accessToken = this.getToken(user);
-      result.success = true;
-      result.message = 'User logged in';
-      result.user = user;
-      return result;
-    }
-
-    result.success = false;
-    result.message = 'Invalid credentials';
-    return result;
-  }
 
   public getToken(user: UserModel): string {
     const expiresIn = process.env.JWT_EXPIRES_IN;
