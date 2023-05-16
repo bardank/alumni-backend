@@ -24,16 +24,17 @@ export class AuthService {
     return phoneRegex.test(phoneNo);
   }
 
+  private isEmail(email: string): boolean {
+    const phoneRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+    return phoneRegex.test(email);
+  }
+
   private async validateUser(
     emailOrPhone: string,
     password: string,
   ): Promise<UserModel> {
     let user: UserModel;
-    if (this.isPhoneNo(emailOrPhone)) {
-      user = await this.usersService.findOneByPhoneWithPassword(
-        emailOrPhone as unknown as number,
-      );
-    } else {
+    if (this.isEmail(emailOrPhone)) {
       user = await this.usersService.findOneByEmailWithPassword(emailOrPhone);
     }
 
@@ -51,7 +52,7 @@ export class AuthService {
   public async registrationValidation(
     createUserInput: CreateUserInput,
   ): Promise<string> {
-    if (!this.isPhoneNo(createUserInput.email.toString())) {
+    if (!this.isEmail(createUserInput.email.toString())) {
       return 'Invalid phone no';
     }
 
@@ -94,7 +95,6 @@ export class AuthService {
     return result;
   }
 
-  
   public async login(email: string, password: string): Promise<AuthResponse> {
     const result = new AuthResponse();
     const user = await this.validateUser(email, password);
@@ -109,8 +109,6 @@ export class AuthService {
     }
     return result;
   }
-
-
 
   public getToken(user: UserModel): string {
     const expiresIn = process.env.JWT_EXPIRES_IN;
@@ -134,14 +132,7 @@ export class AuthService {
     return hash;
   }
 
-  
- 
-
   private addMinutesToDate(date: Date, minutes: number): Date {
     return new Date(date.getTime() + minutes * 60000);
   }
-
-  
-
- 
 }
