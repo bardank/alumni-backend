@@ -21,15 +21,14 @@ export class EventResolver {
     return this.eventService.create(data);
   }
 
-  // @Query(() => EventResponse, {
-  //   name: 'fetchEvents',
-  //   description: 'fetchEvents',
-  // })
-  // @UseGuards(AuthGuard)
-  // async fetchEvents(
-  //   @Args('fetchEventsInput', { type: () => FetchEventsInput })
-  //   data: FetchEventsInput,
-  // ) {
-  //   return this.eventService.fetch(data);
-  // }
+  @Query(() => EventResponse, {
+    name: 'fetchEvents',
+    description: 'fetchEvents',
+  })
+  async fetchEvents(
+    @Args('fetchEventsInput', { type: () => FetchEventsInput })
+    data: FetchEventsInput,
+  ) {
+    return this.eventService.fetch(data);
+  }
 }

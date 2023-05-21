@@ -36,7 +36,7 @@ export class EventService {
 
   async fetch(input: FetchEventsInput): Promise<FetchEventsResponse> {
     const response = new FetchEventsResponse();
-    const {count , pageNo, search} = input;
+    const { count, pageNo, search } = input;
 
     const data = await this.eventModel
       .find({})

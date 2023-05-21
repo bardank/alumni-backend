@@ -1,12 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Event } from 'src/models/events.model';
+import { Alumni } from 'src/models/alumni.model';
 
 @ObjectType()
-export class EventResponse {
+export class AlumniResponse {
   @Field(() => Boolean, { defaultValue: true })
   success: boolean;
   @Field(() => String)
   message: string;
-  @Field(() => Event, { nullable: true })
-  data: Event;
+  @Field(() => Alumni, { nullable: true })
+  data: Alumni;
 }
