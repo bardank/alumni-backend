@@ -4,7 +4,7 @@ import { Field, InputType } from '@nestjs/graphql';
 export class FetchAlumniInputs {
   @Field(() => String, {
     nullable: true,
-    defaultValue: 0,
+    defaultValue: "",
   })
   search: string;
 

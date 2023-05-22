@@ -55,6 +55,7 @@ export class AlumniService {
     response.count = count;
     response.totalPages = totalPages;
     response.next = next;
+    response.back = pageNo > 1;
     response.documentCount = totalAffirmations;
     return response;
   }

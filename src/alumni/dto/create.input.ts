@@ -40,4 +40,7 @@ export class CreateAlumniInput {
 
   @Field(() => String, { nullable: false })
   offerLetterLink: string;
+
+  @Field(() => String, { nullable: false })
+  linkedIn: string;
 }

@@ -17,6 +17,9 @@ export class FetchResponse {
   @Field(() => Boolean, { defaultValue: false })
   next: boolean;
 
+  @Field(() => Boolean, { defaultValue: false })
+  back: boolean;
+
   @Field(() => Number, { defaultValue: 0 })
   count: number;
 

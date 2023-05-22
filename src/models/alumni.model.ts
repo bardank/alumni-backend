@@ -13,7 +13,11 @@ export class Alumni {
   @Field(() => User)
   approvedBy: User | null;
 
-  @Prop({ type: mongoose.Schema.Types.Boolean, required: true })
+  @Prop({
+    type: mongoose.Schema.Types.Boolean,
+    required: false,
+    default: false,
+  })
   @Field(() => Boolean)
   isApproved: boolean;
 
@@ -21,7 +25,6 @@ export class Alumni {
   @Prop({ required: false, default: '' })
   fullName: string;
 
- 
   @Field(() => String, { nullable: false })
   @Prop({ required: false, default: '' })
   email: string;
@@ -65,6 +68,10 @@ export class Alumni {
   @Field(() => String, { nullable: false })
   @Prop({ required: false, default: '' })
   offerLetterLink: string;
+
+  @Field(() => String, { nullable: false })
+  @Prop({ required: false, default: '' })
+  linkedIn: string;
 
   @Prop()
   @Field(() => Date, { description: 'Created At' })
