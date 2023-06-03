@@ -46,6 +46,8 @@ export class EventService {
 
       .exec();
 
+    console.log({ data });
+
     const totalAffirmations = await this.eventModel.countDocuments({});
 
     const totalPages = Math.ceil(totalAffirmations / count);
@@ -58,6 +60,7 @@ export class EventService {
     response.totalPages = totalPages;
     response.next = next;
     response.documentCount = totalAffirmations;
+    console.log({ response });
     return response;
   }
 }

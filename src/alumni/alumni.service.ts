@@ -22,7 +22,8 @@ export class AlumniService {
 
     const alumni = await this.alumniModel.create({
       ...createAlumni,
-      createdBy: this.requestService.getUserId(),
+      isApproved: false,
+      createdBy: null,
     });
 
     response.message = 'Event created successfully';

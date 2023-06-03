@@ -23,7 +23,4 @@ export class AuthResolver {
   ) {
     return this.authService.login(phone, password);
   }
-
-  
-  
 }

@@ -2,9 +2,6 @@ import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateAlumniInput {
-  @Field(() => Boolean)
-  isApproved: boolean;
-
   @Field(() => String, { nullable: false })
   fullName: string;
 

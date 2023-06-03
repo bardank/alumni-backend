@@ -3,8 +3,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document, Schema as MongooseSchema } from 'mongoose';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-
-
 @ObjectType()
 @Schema({ timestamps: true })
 export class Event {
@@ -13,7 +11,7 @@ export class Event {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
   @Field(() => User)
-  createdBy: User | null;
+  createdBy: User;
 
   @Field(() => String, { defaultValue: '' })
   @Prop({ required: false, default: '' })

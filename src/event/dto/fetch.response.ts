@@ -4,7 +4,6 @@ import { Event } from 'src/models/events.model';
 
 @ObjectType()
 export class FetchEventsResponse extends FetchResponse {
- 
   @Field(() => [Event], { nullable: true })
   data: Event[];
 }

@@ -5,6 +5,7 @@ import { CreateEventInput } from './dto/create.input';
 import { EventResponse } from './dto/event.response';
 import { FetchEventsInput } from './dto/fetch.input';
 import { EventService } from './event.service';
+import { FetchEventsResponse } from './dto/fetch.response';
 
 @Resolver()
 export class EventResolver {
@@ -21,7 +22,7 @@ export class EventResolver {
     return this.eventService.create(data);
   }
 
-  @Query(() => EventResponse, {
+  @Query(() => FetchEventsResponse, {
     name: 'fetchEvents',
     description: 'fetchEvents',
   })
