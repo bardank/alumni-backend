@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { FetchEventsResponse } from 'src/event/dto/fetch.response';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 import { AlumniService } from './alumni.service';
 import { AlumniResponse } from './dto/alumni.response';
 import { CreateAlumniInput } from './dto/create.input';
@@ -45,6 +45,17 @@ export class AlumniResolver {
     id: string,
   ) {
     return this.alumniScervice.update(id, data);
+  }
+
+  @Query(() => AlumniResponse, {
+    name: 'getAlumni',
+    description: 'fetchEvents',
+  })
+  async getAlumni(
+    @Args('id', { type: () => String })
+    id: string,
+  ) {
+    return this.alumniScervice.getAlumniById(id);
   }
 
   @Mutation(() => AlumniResponse, {

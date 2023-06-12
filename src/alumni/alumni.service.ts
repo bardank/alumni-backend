@@ -99,4 +99,21 @@ export class AlumniService {
     response.documentCount = totalAffirmations;
     return response;
   }
+
+  async getAlumniById(id: string): Promise<AlumniResponse> {
+    const response = new AlumniResponse();
+
+    const alumni = await this.alumniModel.findById(id);
+    if (!alumni) {
+      response.success = false;
+      response.message = 'Not found';
+      response.data = null;
+      return response;
+    } else {
+      response.success = true;
+      response.message = 'Alumni fetched';
+      response.data = alumni;
+      return response;
+    }
+  }
 }

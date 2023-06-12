@@ -34,6 +34,76 @@ export class EventService {
     return response;
   }
 
+  async update(id: string, data: CreateEventInput): Promise<EventResponse> {
+    const response = new EventResponse();
+
+    const updatedEvent = await this.eventModel
+      .findOneAndUpdate(
+        { _id: id },
+        {
+          ...data,
+          createdBy: this.requestService.getUserId(),
+        },
+        {
+          new: true,
+        },
+      )
+      .populate('createdBy');
+
+    if (!updatedEvent) {
+      response.success = false;
+      response.message = 'Event not found';
+      return response;
+    } else {
+      response.success = true;
+      response.message = 'Event updated successfully';
+      response.data = updatedEvent;
+      return response;
+    }
+  }
+
+  async delete(id: string): Promise<EventResponse> {
+    const response = new EventResponse();
+
+    const deletedEvent = await this.eventModel
+      .findOneAndDelete({
+        _id: id,
+      })
+      .populate('createdBy');
+    if (!deletedEvent) {
+      response.success = false;
+      response.message = 'Event not found';
+      return response;
+    } else {
+      response.success = true;
+      response.message = 'Event deleted successfully';
+      response.data = deletedEvent;
+      return response;
+    }
+  }
+
+  async fetchById(id: string): Promise<EventResponse> {
+    const response = new EventResponse();
+
+    const event = await this.eventModel
+
+      .findOne({
+        _id: id,
+      })
+      .populate('createdBy');
+
+    if (!event) {
+      response.success = false;
+      response.message = 'Event not found';
+      return response;
+    } else {
+      response.success = true;
+      response.message = 'Event fetched successfully';
+      response.data = event;
+      return response;
+    }
+  }
+
   async fetch(input: FetchEventsInput): Promise<FetchEventsResponse> {
     const response = new FetchEventsResponse();
     const { count, pageNo, search } = input;
