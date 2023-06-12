@@ -20,16 +20,44 @@ export class AlumniService {
   async create(createAlumni: CreateAlumniInput): Promise<AlumniResponse> {
     const response = new AlumniResponse();
 
+    const userId = this.requestService.getUserId();
+
     const alumni = await this.alumniModel.create({
       ...createAlumni,
-      isApproved: false,
-      createdBy: null,
+      isApproved: userId ? true : false,
+      createdBy: userId ? userId : null,
     });
 
     response.message = 'Event created successfully';
     response.success = true;
     response.data = alumni;
 
+    return response;
+  }
+
+  async approve(id: string): Promise<AlumniResponse> {
+    const response = new AlumniResponse();
+
+    const userId = this.requestService.getUserId();
+
+    const alumni = await this.alumniModel.findByIdAndUpdate(
+      id,
+      {
+        isApproved: true,
+        approvedBy: userId,
+      },
+      { new: true },
+    );
+
+    if (!alumni) {
+      response.message = 'Alumni not found';
+      response.success = false;
+      return response;
+    }
+
+    response.message = 'Alumni approved successfully';
+    response.success = true;
+    response.data = alumni;
     return response;
   }
 

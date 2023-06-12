@@ -30,5 +30,15 @@ export class AlumniResolver {
   ) {
     return this.alumniScervice.create(data);
   }
-}
 
+  @Mutation(() => AlumniResponse, {
+    name: 'approveAlumni',
+    description: 'fetchEvents',
+  })
+  async approveAlumni(
+    @Args('id', { type: () => String })
+    id: string,
+  ) {
+    return this.alumniScervice.approve(id);
+  }
+}

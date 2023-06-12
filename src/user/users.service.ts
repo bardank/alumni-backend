@@ -41,7 +41,7 @@ export class UsersService {
   async updatePassword(
     password: string,
     salt: string,
-    phone:number
+    phone: number,
   ): Promise<UserModel | undefined> {
     const user = await this.userModel.findOneAndUpdate(
       { phone: phone },

@@ -23,6 +23,9 @@ export class CreateAlumniInput {
   @Field(() => Boolean, { nullable: false })
   isPlacementProvidedBySkit: boolean;
 
+  @Field(() => Boolean, { nullable: false })
+  isApproved: boolean;
+
   @Field(() => Number, { nullable: false })
   yearOfCompletion: number;
 
