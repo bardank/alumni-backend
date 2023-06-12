@@ -35,29 +35,40 @@ export class AlumniService {
     return response;
   }
 
-  async approve(id: string): Promise<AlumniResponse> {
+  async update(id: string, data: CreateAlumniInput): Promise<AlumniResponse> {
     const response = new AlumniResponse();
 
     const userId = this.requestService.getUserId();
 
-    const alumni = await this.alumniModel.findByIdAndUpdate(
-      id,
+    const alumni = await this.alumniModel.findOneAndUpdate(
+      { _id: id },
       {
-        isApproved: true,
-        approvedBy: userId,
+        ...data,
+        isApproved: userId ? true : false,
+        createdBy: userId ? userId : null,
       },
-      { new: true },
+      {
+        new: true,
+      },
     );
 
-    if (!alumni) {
-      response.message = 'Alumni not found';
-      response.success = false;
-      return response;
-    }
-
-    response.message = 'Alumni approved successfully';
+    response.message = 'Event created successfully';
     response.success = true;
     response.data = alumni;
+
+    return response;
+  }
+
+  async delete(id: string): Promise<AlumniResponse> {
+    const response = new AlumniResponse();
+
+    const userId = this.requestService.getUserId();
+
+    const alumni = await this.alumniModel.findByIdAndDelete({ _id: id });
+    response.message = 'Event created successfully';
+    response.success = true;
+    response.data = alumni;
+
     return response;
   }
 
