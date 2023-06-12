@@ -20,12 +20,51 @@ export class AlumniService {
   async create(createAlumni: CreateAlumniInput): Promise<AlumniResponse> {
     const response = new AlumniResponse();
 
+    const userId = this.requestService.getUserId();
+
     const alumni = await this.alumniModel.create({
       ...createAlumni,
-      isApproved: false,
-      createdBy: null,
+      isApproved: userId ? true : false,
+      createdBy: userId ? userId : null,
     });
 
+    response.message = 'Event created successfully';
+    response.success = true;
+    response.data = alumni;
+
+    return response;
+  }
+
+  async update(id: string, data: CreateAlumniInput): Promise<AlumniResponse> {
+    const response = new AlumniResponse();
+
+    const userId = this.requestService.getUserId();
+
+    const alumni = await this.alumniModel.findOneAndUpdate(
+      { _id: id },
+      {
+        ...data,
+        isApproved: userId ? true : false,
+        createdBy: userId ? userId : null,
+      },
+      {
+        new: true,
+      },
+    );
+
+    response.message = 'Event created successfully';
+    response.success = true;
+    response.data = alumni;
+
+    return response;
+  }
+
+  async delete(id: string): Promise<AlumniResponse> {
+    const response = new AlumniResponse();
+
+    const userId = this.requestService.getUserId();
+
+    const alumni = await this.alumniModel.findByIdAndDelete({ _id: id });
     response.message = 'Event created successfully';
     response.success = true;
     response.data = alumni;
