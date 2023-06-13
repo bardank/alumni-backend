@@ -108,7 +108,7 @@ export class AlumniService {
 
       .exec();
 
-    console.log({ data });
+    // console.log({ data });
 
     const totalAffirmations = await this.alumniModel.countDocuments({});
 
