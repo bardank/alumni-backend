@@ -72,17 +72,43 @@ export class AlumniService {
     return response;
   }
 
+  private isNumber(value: string | number): boolean {
+    return !isNaN(Number(value.toString()));
+  }
+
   async fetch(input: FetchAlumniInputs): Promise<AlumniFetchResponse> {
     const response = new AlumniFetchResponse();
     const { count, pageNo, search } = input;
 
+    let query = {};
+
+    if (search) {
+      if (this.isNumber(search)) {
+        query = {
+          $or: [
+            { passoutYear: { $eq: parseInt(search) } }, // Search by passoutYear if search query is a number
+          ],
+        };
+      } else {
+        query = {
+          $or: [
+            { email: { $regex: search, $options: 'i' } }, // Case-insensitive search in email field
+            { fullName: { $regex: search, $options: 'i' } }, // Case-insensitive search in name field
+            // { passoutYear: { $eq: parseInt(search) } }, // Search by passoutYear if search query is a number
+          ],
+        };
+      }
+    }
+
     const data = await this.alumniModel
-      .find({})
+      .find(query)
       .sort({ createdAt: -1 })
       .skip((pageNo - 1) * count)
       .limit(count)
 
       .exec();
+
+    console.log({ data });
 
     const totalAffirmations = await this.alumniModel.countDocuments({});
 
