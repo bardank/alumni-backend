@@ -94,6 +94,7 @@ export class AlumniService {
           $or: [
             { email: { $regex: search, $options: 'i' } }, // Case-insensitive search in email field
             { fullName: { $regex: search, $options: 'i' } }, // Case-insensitive search in name field
+            { usn: { $regex: search, $options: 'i' } }, // Case-insensitive search in name field
             // { passoutYear: { $eq: parseInt(search) } }, // Search by passoutYear if search query is a number
           ],
         };
@@ -108,7 +109,7 @@ export class AlumniService {
 
       .exec();
 
-    // console.log({ data });
+    console.log({ query, search, isTure: this.isNumber(search) });
 
     const totalAffirmations = await this.alumniModel.countDocuments({});
 
