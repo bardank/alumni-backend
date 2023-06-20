@@ -14,6 +14,7 @@ import { ProfileModule } from './profile/profile.module';
 import { UploadModule } from './upload/upload.module';
 import { AlumniModule } from './alumni/alumni.module';
 import { EventModule } from './event/event.module';
+import { OpportunityModule } from './opportunity/opportunity.module';
 
 // export interface GqlContext {
 //   req: Request;
@@ -94,6 +95,7 @@ import { EventModule } from './event/event.module';
     UploadModule,
     AlumniModule,
     EventModule,
+    OpportunityModule,
   ],
 })
 export class AppModule {}
