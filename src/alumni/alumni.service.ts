@@ -105,7 +105,7 @@ export class AlumniService {
     if (!userId) {
       query = {
         ...query,
-        isVerified: true,
+        isApproved: true,
       };
     }
 
@@ -117,7 +117,7 @@ export class AlumniService {
 
       .exec();
 
-    console.log({ query, search, isTure: this.isNumber(search) });
+    console.log({ query, search, userId });
 
     const totalAffirmations = await this.alumniModel.countDocuments({});
 
