@@ -8,6 +8,8 @@ export class FetchAlumniInputs {
   })
   search: string;
 
+
+
   @Field(() => Number, {
     nullable: true,
     defaultValue: 1,

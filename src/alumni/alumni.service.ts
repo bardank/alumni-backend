@@ -81,6 +81,7 @@ export class AlumniService {
     const { count, pageNo, search } = input;
 
     let query = {};
+    const userId = this.requestService.getUserId();
 
     if (search) {
       if (this.isNumber(search)) {
@@ -99,6 +100,13 @@ export class AlumniService {
           ],
         };
       }
+    }
+
+    if (!userId) {
+      query = {
+        ...query,
+        isVerified: true,
+      };
     }
 
     const data = await this.alumniModel
