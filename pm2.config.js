@@ -8,6 +8,7 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
       },
+      post_update: ['npm install', 'npm run build'],
     },
   ],
 };
